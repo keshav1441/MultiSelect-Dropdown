@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Task_5.Models.Dropdown>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+
+<h2>Multiselect Dropdown with Checkbox</h2>
+
+<!-- Multiselect dropdown control -->
+<div>
+    <select id="mySkills" multiple="multiple" name="mySkillsName">
+        @if (ViewBag.mySkills != null)
+        {
+            foreach (var item in ViewBag.mySkills)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        }
+    </select>
+</div>
+
+<br />
+<br />
+
+<!-- Button to get selected skills -->
+<input type="button" id="btnGetSkills" value="Click me to Get Selected Skill(s)" />
+
+<!-- Script to initialize the multiselect and handle button click -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#mySkills').multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: '--Select Skills--',
+            enableFiltering: true,
+            buttonWidth: '100%'
+        });
+
+        $("#btnGetSkills").click(function () {
+            alert($("#mySkills").val());
+        });
+    });
+</script>
